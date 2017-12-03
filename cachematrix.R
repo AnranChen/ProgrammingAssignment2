@@ -1,10 +1,12 @@
 ## This function creates a special "matrix" object that can cache its inverse
+## Assumed that the matrix supplied is always invertible.
 
 ## makeCacheMatrix makes a list containing a function to
 ##set the value of the vector
 ##get the value of the vector
 ##set the value of the mean
 ##get the value of the mean
+
 
 
 makeCacheMatrix <- function(x = numeric()) {
@@ -14,12 +16,12 @@ makeCacheMatrix <- function(x = numeric()) {
                 m <<- NULL
         }
         get <- function() x
-        setmean <- function(mean) m <<- mean
-        getmean <- function() m
+        setinverse <- function(inverse) inv <<- inverse
+        getInverse <- function() m
         list(set = set, 
              get = get, 
-             setmean = setmean,
-             getmean = getmean)
+             setinverse = setinverse,
+             getinverse = getinverse)
 }
 
 ## cacheSolve returns a matrix that is the inverse of x
@@ -34,3 +36,4 @@ makeCacheMatrix <- function(x = numeric()) {
      inv <- solve(data)
      x$setinverse(inv)
      inv
+}
